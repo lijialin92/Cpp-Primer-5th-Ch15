@@ -34,10 +34,16 @@ public:
         return n * price;
     }
 
+    virtual void debug() const
+    {
+        std::cout << "bookNo: "<< bookNo << "price: " << price << std::endl;
+    }
+
     virtual ~Quate() = default;
 
 private:
     std::string bookNo;
+
 protected:
     double price;
 
@@ -60,13 +66,20 @@ double print_total(std::ostream& os, const Quate& item, int salesNumber)
 
 /**
  * exercise 15.5*/
-
-class Bulk_quote : public Quate
+/*
+class Bulk_quote : public disc_quote
 {
 public:
     Bulk_quote() = default;
     Bulk_quote(const std::string& book, double salesPrice, int salesNumber, double disc):
     Quate(book, salesPrice), min_qty(salesNumber), discount(disc){}
+
+    virtual void debug() const override
+    {
+        Quate::debug();
+        std::cout << "discount" << discount << " min_qty: " << min_qty << std::endl;
+    }
+
     virtual ~Bulk_quote() = default;
     double net_price(int n) const override;
 
@@ -86,7 +99,7 @@ double Bulk_quote::net_price(int n) const
     {
         return n * price;
     }
-}
+}*/
 
 /**
  * exercise 15.6
@@ -101,7 +114,7 @@ double Bulk_quote::net_price(int n) const
  * */
 
 /**
- * exercise 15.7*/
+ * exercise 15.7
 
 class Limited_quote : public Quate
 {
@@ -128,6 +141,126 @@ private:
     int thresholdVlaue = 0;
     double discount = 0.0;
 };
+
+ */
+
+/**
+ * exercise 15.8
+ * 静态类型在编译的时候就已经确定了，他是变量的类型或者是表达式的类型。
+ * 动态类型是变量或者表达式表示的内存中的对象的类型，动态类型一直到运行是才能知道。*/
+
+/**
+ * exercise 15.9
+ * print_total(ostream& os, const Quote& item, int n)
+ * 如果传入的实参是以下三种就表达式的静态类型和动态类型是不一样的
+ * 1. Bulk_quote bulk;
+ * 2. Quote* bulk_ptr = & bulk;
+ * 3. Quote& bulk_ref = bulk;
+ * */
+
+/**
+ * exercise 15.10
+ * 在要求使用基类对象的地方，可以使用派生类类型的对象来代替，是静态类型和动态类型的典型例子*/
+
+/**
+ * exercise 15.11
+ * see the debug() in the class Quote and Bulk_quote*/
+
+/**
+ * exercise 15.12
+ * 有的时候是有必要把一个函数同时声明override和final的。当这个函数覆盖基类中的虚函数，并且之后不再允许派生类覆盖这个函数。*/
+
+/**
+ * exercise 15.13
+ * derived类中的print函数中调用print()应该是调用基类base类中的print()。如果没有加作用域的话就是调用自己本身，回到是死循环递归。
+ * 应该改成：
+ * void print(ostream& os) override
+ * {
+ * base::print();
+ * os << " " << i;
+ * }*/
+
+/**
+ * exercise 15.14
+ * a. 基类的print()
+ * b. 派生类的print()
+ * c. 基类的name()
+ * d. 基类的name()
+ * e. 基类的print()
+ * f. 派生类的print()*/
+
+/**
+ * exercise 15.15*/
+class disc_quote : public Quate
+{
+public:
+    disc_quote() = default;
+    disc_quote(const std::string& book, double salesPrice, int sales_qty, double disc):
+    Quate(book, salesPrice), quantity(sales_qty), discount(disc){}
+
+    virtual double net_price(int n) const = 0;
+
+    virtual ~disc_quote() = default;
+
+protected:
+    int quantity;
+    double discount;
+
+};
+
+class Bulk_quote : public disc_quote
+{
+public:
+    Bulk_quote() = default;
+    Bulk_quote(const std::string& book, double salesPrice, int salesNumber, double disc):
+            disc_quote(book, salesPrice, salesNumber, disc){}
+
+    virtual ~Bulk_quote() = default;
+    double net_price(int n) const override;
+};
+
+double Bulk_quote::net_price(int n) const
+{
+    if(n >= quantity)
+    {
+        return n * price * (1 - discount);
+    }
+    else
+    {
+        return n * price;
+    }
+}
+
+
+/*
+ * exercise 15.16*/
+
+class Limited_quote : public disc_quote
+{
+public:
+    Limited_quote() = default;
+    Limited_quote(const std::string& book, double salesPrice, int maxNUmberOfDiscount, double disc):
+            disc_quote(book, salesPrice, maxNUmberOfDiscount, disc){}
+    virtual ~Limited_quote() = default;
+
+    double net_price(int n) const override
+    {
+        if (n <= quantity)
+        {
+            return n * price * (1 - discount);
+        }
+        else
+        {
+            return (quantity * price * (1 - discount)) + (n - quantity) * price;
+        }
+
+    }
+}
+
+/**
+ * exercise 15.17
+ * Variable type 'disc_quote' is an abstract class*/
+
 
 int main() {
     Quate sale1("1", 10);
