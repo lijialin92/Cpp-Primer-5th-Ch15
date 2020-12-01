@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Chapter15.dir/Shape.cpp.obj"
   "CMakeFiles/Chapter15.dir/main.cpp.obj"
   "Chapter15.exe"
   "Chapter15.exe.manifest"

@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/lijialin92/Desktop/Chapter15/Shape.cpp">
+			<Option target="Chapter15"/>
+		</Unit>
+		<Unit filename="C:/Users/lijialin92/Desktop/Chapter15/Shape.h">
+			<Option target="Chapter15"/>
+		</Unit>
 		<Unit filename="C:/Users/lijialin92/Desktop/Chapter15/main.cpp">
 			<Option target="Chapter15"/>
 		</Unit>

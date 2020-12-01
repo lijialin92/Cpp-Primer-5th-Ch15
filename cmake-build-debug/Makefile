@@ -142,6 +142,33 @@ Chapter15/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chapter15.dir\build.make CMakeFiles/Chapter15.dir/build
 .PHONY : Chapter15/fast
 
+Shape.obj: Shape.cpp.obj
+
+.PHONY : Shape.obj
+
+# target to build an object file
+Shape.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chapter15.dir\build.make CMakeFiles/Chapter15.dir/Shape.cpp.obj
+.PHONY : Shape.cpp.obj
+
+Shape.i: Shape.cpp.i
+
+.PHONY : Shape.i
+
+# target to preprocess a source file
+Shape.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chapter15.dir\build.make CMakeFiles/Chapter15.dir/Shape.cpp.i
+.PHONY : Shape.cpp.i
+
+Shape.s: Shape.cpp.s
+
+.PHONY : Shape.s
+
+# target to generate assembly for a file
+Shape.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Chapter15.dir\build.make CMakeFiles/Chapter15.dir/Shape.cpp.s
+.PHONY : Shape.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -178,6 +205,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Chapter15
+	@echo ... Shape.obj
+	@echo ... Shape.i
+	@echo ... Shape.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

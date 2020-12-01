@@ -3,4 +3,4 @@ project(Chapter15)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Chapter15 main.cpp)
+add_executable(Chapter15 main.cpp Shape.cpp Shape.h)
